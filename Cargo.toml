@@ -1,0 +1,17 @@
+[package]
+name = "genetic-algorithm-tsp-api"
+version = "0.1.1"
+edition = "2021"
+authors = ["Tim Toebrock"]
+license = "MIT"
+description = """
+Create an api solving traveling-saleman-problems with genetic algorithms.
+"""
+
+[dependencies]
+genetic-algorithm-traits = "0.1.0"
+genetic-algorithm-tsp = "0.1.1"
+rand = "0.8.4"
+
+[profile.dev]
+opt-level = 3
