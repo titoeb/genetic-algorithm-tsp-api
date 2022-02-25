@@ -9,6 +9,9 @@ Create an api solving traveling-saleman-problems with genetic algorithms.
 """
 
 [dependencies]
+rocket = { version = "0.5.0-rc.1", features = ["json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 genetic-algorithm-traits = "0.1.0"
 genetic-algorithm-tsp = "0.1.1"
 rand = "0.8.4"
