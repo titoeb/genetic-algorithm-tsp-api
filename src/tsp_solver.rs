@@ -39,7 +39,8 @@ pub fn solve_tsp(
     n_generations: usize,
     n_routes: usize,
     n_random_individuals_per_generation: usize,
-) -> route::Route {
+    top_n: usize,
+) -> Vec<route::Route> {
     let initial_population = distance_matrix.get_random_population(n_routes);
     // Decay mutation probability.
     (0..10000)
@@ -54,16 +55,16 @@ pub fn solve_tsp(
                     .get_fittest_population(n_routes, distance_matrix)
             },
         )
-        .get_n_fittest(1, distance_matrix)[0]
-        .clone()
+        .get_n_fittest(top_n, distance_matrix)
 }
 
 mod tests {
-    use super::*;
-    use std::fs;
-    use std::thread;
     #[test]
     fn test_duration() {
+        use super::duration_to_ms;
+        use std::thread;
+        use std::time;
+
         // Test that after waiting for 12 ms, `duration_to_ms`
         // reports correctly that 12 ms have gone by.
         let before = time::Instant::now();
@@ -72,6 +73,9 @@ mod tests {
     }
     #[test]
     fn test_solve_tsp() {
+        use super::solve_tsp;
+        use genetic_algorithm_tsp::distance_mat;
+        use std::fs;
         // Just run `solve_tsp` for a simple distance matrix.
         // Load in the test matrix.
         let distances = distance_mat::DistanceMat::new(
@@ -88,6 +92,6 @@ mod tests {
                 .collect(),
         );
         // Get a solution
-        let _ = solve_tsp(&distances, 20, 10, 10);
+        let _ = solve_tsp(&distances, 20, 10, 10, 3);
     }
 }
