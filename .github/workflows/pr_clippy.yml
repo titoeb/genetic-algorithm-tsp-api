@@ -5,7 +5,7 @@ permissions:
   checks: write
   contents: read
 jobs:
-  clippy_check:
+  clippy-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository.
